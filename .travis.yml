@@ -13,3 +13,5 @@ before_script:
   - npm install -g mocha
 
 # script: mocha  - removed since this is setup in package.json line 7 
+
+# adding comment to checkout out merging a branch and travis
