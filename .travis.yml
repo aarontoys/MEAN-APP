@@ -17,3 +17,9 @@ deploy:
     branch: master
     node: '5'
     repo: aarontoys/MEAN-APP
+
+
+# script: mocha  - removed since this is setup in package.json line 7 
+
+# adding comment to checkout out merging a branch and travis
+
