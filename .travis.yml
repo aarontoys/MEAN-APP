@@ -12,4 +12,4 @@ services: mongodb
 before_script:
   - npm install -g mocha
 
-# script: mocha  - removed since this is setup in package.json line 7
+# script: mocha  - removed since this is setup in package.json line 7 
