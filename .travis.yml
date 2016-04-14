@@ -1,15 +1,19 @@
 language: node_js
-
 node_js:
-  - "5"
-  - "4.1"
-  - "4.0"
-  - '0.12'
-  - '0.11'
-
+- '5'
+- '4.1'
+- '4.0'
+- '0.12'
+- '0.11'
 services: mongodb
-
 before_script:
-  - npm install -g mocha
-
-# script: mocha  - removed since this is setup in package.json line 7 
+- npm install -g mocha
+deploy:
+  provider: heroku
+  api_key:
+    secure: j+tEcsh1eAcKvjZaOOYAlDNwJavxZCLTjxdPWlQ7wUESQ4+7PW4cUlSCbTCeDgayfzoYXFTaq7P56OlHB4U0wmIsXe8+CjXgwea8F09kZyEU3S5soP+Bubq70bQI7b08T3a7zCLO36lCcYlN2VvDpIRZzTeykzh7Ji0XBFtLA+Xzvr/FXGNOFQOxQI++ZuWoIYOR4jYAQRdtV62b9OXzSfrY9ZhsZVQ+ITXok/WSxKpXayBUCBez3GqEUC5zljCmV90HaROTqdcON5f/1dtqwiIJ4RL+1rY0OxWpdL3AjU/K8G9Nsn9rnH5l1iUOtI7cuEbrJrqdIGYJm0i0ML8Rck2w55RsHSNJb2hi4HeHpO7b6V/L3MoJW/Sv5bYedifKzdtge41BFxP8J7JUIgVOX+8QTnb6maDdhz4xHXgruL6BmbLJMd50V1Fvq7O5C4PzWszJkbVid6hjTZLJ/2oVRhf3FZyYW6NSKTEb0C3EU0ucHd5CZn26ZP+ULj5Uw65lXAUQ8sVk46RDcKacgaLetlmfxlmDVO6xiOYFmLsWxsbajcMXikhGzqgi+3jHTs8TOOIC/Vsd5uIHm6DtFEHQh1G7404hTzs2jg+kL01kLMQ2fR2DArbMUqAdyN8KqZgRZnFNl7/WqoEaK9YI9YL/5iSt3GTFidod1PetvqOOWQA=
+  app: fisrt-mean-app
+  on:
+    branch: master
+    node: '5'
+    repo: aarontoys/MEAN-APP
