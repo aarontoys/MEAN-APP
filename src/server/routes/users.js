@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var moment - require('moment');
+var moment = require('moment');
 var jwt = require('jwt-simple');
-var config = require('../../config');
+var config = require('../../_config');
 
 var User = require('../models/users')
 
@@ -58,7 +58,7 @@ router.post('/login', function(req, res, next) {
       }); 
     }
     user = user.toObject();
-    delete = user.password;
+    delete user.password;
       // create token
     var token = generateToken(user);
     res.status(200).json({
@@ -70,6 +70,7 @@ router.post('/login', function(req, res, next) {
     });
   });
 });
+});
 
 router.get('/logout', function(req, res, next) {
 
@@ -79,9 +80,9 @@ module.exports = router;
 
 //generate a token
 function generateToken(user) {
-  var payload: {
+  var payload = {
     exp: moment().add(14,'days').unix(),
-    iat: moment().unix().
+    iat: moment().unix(),
     sub: user._id
   }
   return jwt.enconde(payload, config.TOKEN_SECRET);
@@ -99,7 +100,7 @@ function ensureAuthenticated(req, res, next) {
   //decode the token
   var header = req.headers.authorization.split(' ');
   var token = header[1];
-  var payload - jwt.decode(token, config.TOKEN_SECRET);
+  var payload = jwt.decode(token, config.TOKEN_SECRET);
   var now = moment().unix();
   //ensure that it is valid
   if(now > payload.exp) {

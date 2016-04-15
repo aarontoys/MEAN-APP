@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcryptjs')
-var config = require('../../../_config');
+var config = require('../../_config');
 
 var UserSchema = new Schema({
   email: {
@@ -21,7 +21,7 @@ var UserSchema = new Schema({
 
 //hash the password before saving it
 
-User.Schema.pre('save', function (next) {
+UserSchema.pre('save', function (next) {
   var user = this;
   // only hash pw if new or modified
   if (!user.isModified('password')) {

@@ -13,7 +13,7 @@
         <td>{{ student.fName }}</td>
         <td>{{ student.lName }}</td>
         <td>{{ student.year }}</td>
-        <td><span class="glyphicon glyphicon glyphicon-remove"></span></td>
+        <td><span class="glyphicon glyphicon glyphicon-remove" ng-click="deleteStudent(student._id)"></span></td>
       </tr>
     </tbody>
   </table>

@@ -18,5 +18,13 @@ app.controller('addStudentController', ['$scope', 'studentDataService', function
     });
   }
 
+  $scope.deleteStudent = function (id) {
+    console.log('controller: deleteStudent', id);
+    studentDataService.deleteStudent(id)
+      .then(function (){
+        getStudents();
+      });
+  }
+
   getStudents();
 }])
