@@ -101,7 +101,6 @@ router.put('/:id', function(req, res, next) {
 
 router.post('/delete/:id', function (req, res, next) {
   var student = req.params.id;
-  console.log('routes 104 studentid: ',student);
   Students.findByIdAndRemove(student)
     .then(function (result) {
       res.status(200).json({
@@ -110,7 +109,6 @@ router.post('/delete/:id', function (req, res, next) {
       });
     })
     .catch(function (err) {
-      console.log('student routes line 133: err ', err);
       return next(err);
     });
 });

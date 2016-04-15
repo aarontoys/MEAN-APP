@@ -3,7 +3,6 @@ app.controller('addStudentController', ['$scope', 'studentDataService', function
   $scope.student = {};
 
   $scope.addStudent = function () {
-    console.log(this.student);
     studentDataService.addStudent(this.student)
       .then(function () {
         getStudents();
@@ -19,7 +18,6 @@ app.controller('addStudentController', ['$scope', 'studentDataService', function
   }
 
   $scope.deleteStudent = function (id) {
-    console.log('controller: deleteStudent', id);
     studentDataService.deleteStudent(id)
       .then(function (){
         getStudents();
