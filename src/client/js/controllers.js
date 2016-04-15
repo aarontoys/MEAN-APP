@@ -2,6 +2,8 @@ app.controller('addStudentController', ['$scope', 'studentDataService', function
   
   $scope.student = {};
 
+  $scope.show = true;
+
   $scope.addStudent = function () {
     studentDataService.addStudent(this.student)
       .then(function () {
@@ -22,6 +24,21 @@ app.controller('addStudentController', ['$scope', 'studentDataService', function
       .then(function (){
         getStudents();
       });
+  }
+
+  $scope.editStudent = function () {
+    this.show = true;
+    console.log(this.student);
+    console.log($scope.student);
+    studentDataService.editStudent(this.student)
+      .then(function () {
+        getStudents();
+      });
+  }
+
+  $scope.makeEditable = function () {
+    this.show = false;
+    console.log(this.show);
   }
 
   getStudents();

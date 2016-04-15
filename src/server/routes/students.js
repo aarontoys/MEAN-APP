@@ -84,17 +84,31 @@ router.post('/', function(req, res, next) {
 
 //update student
 
-router.put('/:id', function(req, res, next) {
+router.put('/edit/:id', function(req, res, next) {
+  var id = req.params.id;
   var student = new Students(req.body);
-  student.save(function (err, newStudent) {
-    if(err) {
-      return next(err)
-    }
-    res.status(200).json({
-      status: 'success',
-      data: newStudent
+  console.log('line 90',id);
+  console.log('line92',student);
+  Students.findByIdAndUpdate(id, student, {new: true})
+    .then(function (result) {
+      res.status(200).json({
+        status: 'success',
+        data: result
+      });
+    })
+    .catch(function (err) {
+      return next(err);
     });
-  });
+
+  // (function (err, newStudent) {
+  //   if(err) {
+  //     return next(err)
+  //   }
+  //   res.status(200).json({
+  //     status: 'success',
+  //     data: newStudent
+  //   });
+  // });
 });
 
 //remove student

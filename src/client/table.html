@@ -2,6 +2,7 @@
   <table class="table table-striped table-hover">
     <thead>
       <tr>
+        <th></th>
         <th>First Name</th>
         <th>Last Name</th>
         <th>Year</th>
@@ -10,10 +11,17 @@
     </thead>
     <tbody>
       <tr ng-repeat="student in students">
-        <td>{{ student.fName }}</td>
-        <td>{{ student.lName }}</td>
-        <td>{{ student.year }}</td>
-        <td><span class="glyphicon glyphicon glyphicon-remove" ng-click="deleteStudent(student._id)"></span></td>
+        <td>
+          <span class="glyphicon glyphicon-pencil" ng-click="makeEditable()"></span>
+
+        </td>
+        <td ng-class="{'editable': !show}"contenteditable="{{!show}}" ng-model="student.fName"></td>
+        <td ng-class="{'editable': !show}"contenteditable="{{!show}}" ng-model="student.lName">{{ student.lName }}</td>
+        <td ng-class="{'editable': !show}"contenteditable="{{!show}}" ng-model="student.year">{{ student.year }}</td>
+        <td>
+          <span class="glyphicon glyphicon glyphicon-remove" ng-show="show" ng-click="deleteStudent(student._id)"></span>
+          <span class="glyphicon glyphicon glyphicon-ok" ng-show="!show" ng-click="editStudent(student)"></span>
+        </td>
       </tr>
     </tbody>
   </table>
