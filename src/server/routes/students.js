@@ -34,7 +34,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/:id', function(req, res, next) {
   studentId = req.params.id;
-  Students.findOne({})
+  Students.findOne({_id: studentId})
     .then(function (result) {
       res.status(200).json({
         status: 'success',
