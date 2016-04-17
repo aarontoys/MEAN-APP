@@ -7,7 +7,17 @@ a {
   color: #00B7FF;
 }
 
-/*.editable {
-  outline: 2px lightblue solid;
-  border-radius: 5px;
+/*td {
+  border: 2px rgba(0, 0, 0, 0.0) solid;
+}*/
+
+.editable {
+  outline: -webkit-focus-ring-color auto 5px;
+  outline-offset: -3px; 
+}
+
+/*[contenteditable="true"]:active,
+[contenteditable="true"]:focus{
+border:none;
+outline:none;
 }*/
