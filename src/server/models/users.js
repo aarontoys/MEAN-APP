@@ -2,6 +2,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcryptjs')
 var config = require('../../_config');
+// var config = require('../../../_config'); -- maybe need to use this one
+
 
 var UserSchema = new Schema({
   email: {
@@ -15,6 +17,7 @@ var UserSchema = new Schema({
   },
   admin: {
     type: Boolean,
+    required: true,
     default: false 
   }
 });
@@ -37,7 +40,7 @@ UserSchema.pre('save', function (next) {
       if (err) {
         return next(err);
       }
-      user.password - hash;
+      user.password = hash;
       // go to the next middleware function
       next();
     });

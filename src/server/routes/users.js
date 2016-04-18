@@ -58,7 +58,7 @@ router.post('/login', function(req, res, next) {
       }); 
     }
     user = user.toObject();
-    delete user.password;
+    // delete user.password;
       // create token
     var token = generateToken(user);
     res.status(200).json({
