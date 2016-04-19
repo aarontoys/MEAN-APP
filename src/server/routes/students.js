@@ -2,10 +2,12 @@ var express = require('express');
 var router = express.Router();
 
 var Students = require('../models/students');
+var ensureAuthenticated = require('./users')
+var ensureAdmin = require('./users')
 
 //GET ALL students
 
-router.get('/', function(req, res, next) {
+router.get('/', ensureAuthenticated, function(req, res, next) {
   Students.find({})
     .then(function(result) {
       res.status(200).json({
@@ -126,5 +128,57 @@ router.post('/delete/:id', function (req, res, next) {
       return next(err);
     });
 });
+
+function ensureAuthenticated(req, res, next) {
+  console.log('line 133');
+  //check headers & presence of auth object
+  if(!(req.headers && req.headers.authorization)){
+    return res.status(401).json({
+      status: 'fail',
+      message: 'No headers present or no authorization header'
+    });
+  }
+
+  //decode the token
+  var header = req.headers.authorization.split(' ');
+  var token = header[1];
+  var payload = jwt.decode(token, config.TOKEN_SECRET);
+  var now = moment().unix();
+  //ensure that it is valid
+  if(now > payload.exp) {
+    return res.status(401).json({
+      status: 'fail',
+      message: 'Token is invalid'
+    });
+  }
+  //ensure user is still in the database
+  User.findById(payload.sub, function(err, user) {
+    if(err) {
+      return next(err);
+    }
+    if(!user) {
+      return res.status(401).json({
+        status: 'fail',
+        message: 'User does not exist'
+      });
+    }
+    // attach user to request objecct
+    req.user = user;
+    //call next middleware
+    next();
+  })
+}
+
+function ensureAdmin(req, res, next) {
+  //check for the user object
+  //ensure for admin === true on user object
+  if(!(req.user && req.user.admin)) {
+    return res.status(401).json({
+      status: 'fail',
+      message: 'User is not an admin'
+    });
+  }
+  next();
+}
 
 module.exports = router;
