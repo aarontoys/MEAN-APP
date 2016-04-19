@@ -11,7 +11,7 @@ config.mongoURI = {
 //   test: 10,
 //   production: 12
 // }
-config.SALT_WORK_FACTOR - 10;
+config.SALT_WORK_FACTOR = 10;
 config.TOKEN_SECRET = '9\x10\x9fY\xb6\x10\xf4AF\xdc'
 
 module.exports = config;

@@ -22,7 +22,7 @@ router.post('/register', function(req, res, next) {
     var newUser = new User(req.body);
     newUser.save(function(){
       // create token
-      var token = generateToken(user);
+      var token = generateToken(newUser);
       res.status(200).json({
         status: 'success',
         data: {
@@ -65,7 +65,7 @@ router.post('/login', function(req, res, next) {
       status: 'success',
       data: {
         token: token,
-        user: newUser.email
+        user: user.email
       }
     });
   });
@@ -85,7 +85,7 @@ function generateToken(user) {
     iat: moment().unix(),
     sub: user._id
   }
-  return jwt.enconde(payload, config.TOKEN_SECRET);
+  return jwt.encode(payload, config.TOKEN_SECRET);
 }
 
 function ensureAuthenticated(req, res, next) {

@@ -9,7 +9,7 @@
 app.directive('appForm', function () {
   return {
     restrict: 'EA',
-    templateUrl: '../form.html',
+    templateUrl: '../templates/form.html',
     controller: ['$scope', 'studentDataService', function ($scope, studentDataService) {
       $scope.student = {};
       $scope.addStudent = function () {
@@ -35,7 +35,7 @@ app.directive('appForm', function () {
 app.directive('appTable', function () {
   return {
     restrict: 'EA',
-    templateUrl: '../table.html',
+    templateUrl: '../templates/table.html',
     controller: ['$scope', 'studentDataService', function ($scope, studentDataService) {
       $scope.student = {};
 
@@ -78,14 +78,42 @@ app.directive('appTable', function () {
 app.directive('appLogin', function () {
   return {
     restrict: 'EA',
-    templateUrl: '../login.html'
+    templateUrl: '../templates/login.html',
+    controller: ['$scope', '$location', 'authService', function($scope, $location, authService) {
+      $scope.user = {};
+      $scope.login = function() {
+        authService.login($scope.user)
+          .then(function(user) {
+            authService.setUserInfo(user);
+            $location.path('/');
+          })
+          .catch(function(err) {
+            // check status code, send appropriate message
+            console.log(err);
+          });
+      };
+    }]
   }
 });
 
 app.directive('appRegister', function () {
   return {
     restrict: 'EA',
-    templateUrl: '../register.html'
+    templateUrl: '../templates/register.html',
+    controller: ['$scope', '$location', 'authService', function($scope, $location, authService) {
+      $scope.user = {};
+      $scope.register = function() {
+        authService.register($scope.user)
+          .then(function(user) {
+            authService.setUserInfo(user);
+            $location.path('/');
+          })
+          .catch(function(err) {
+            // check status code, send appropriate message
+            console.log(err);
+          });
+      };
+    }]
   }
 });
 
